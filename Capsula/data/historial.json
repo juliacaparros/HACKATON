@@ -28,5 +28,23 @@
         "txt": "stefen.jpg_info.txt",
         "svg": "stefen.jpg_diagram.svg",
         "zip": "stefen.jpg_capsula.zip"
+    },
+    {
+        "enc": "stefen.jpg.enc",
+        "txt": "stefen.jpg_info.txt",
+        "svg": "stefen.jpg_diagram.svg",
+        "zip": "stefen.jpg_capsula.zip"
+    },
+    {
+        "enc": "Captura_desde_2025-03-29_16-18-43.png.enc",
+        "txt": "Captura_desde_2025-03-29_16-18-43.png_info.txt",
+        "svg": "Captura_desde_2025-03-29_16-18-43.png_diagram.svg",
+        "zip": "Captura_desde_2025-03-29_16-18-43.png_capsula.zip"
+    },
+    {
+        "enc": "Captura_desde_2025-03-29_15-04-06.png.enc",
+        "txt": "Captura_desde_2025-03-29_15-04-06.png_info.txt",
+        "svg": "Captura_desde_2025-03-29_15-04-06.png_diagram.svg",
+        "zip": "Captura_desde_2025-03-29_15-04-06.png_capsula.zip"
     }
 ]
