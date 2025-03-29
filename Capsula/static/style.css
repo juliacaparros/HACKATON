@@ -27,3 +27,12 @@ body {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+@keyframes rotateDoor {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-100deg); }
+}
+
+.d-none {
+    display: none;
+}
