@@ -1,11 +1,17 @@
 body {
     background: url("../static/space.jpg") no-repeat center center fixed;
     background-size: cover;
+    font-family: 'Segoe UI', sans-serif;
     color: white;
+    min-height: 100vh;
 }
 .card {
     background-color: rgba(25, 27, 40, 0.75);
     border-radius: 1rem;
+}
+
+h1, h4 {
+    color: #2c3e50;
 }
 
 .btn-primary {
