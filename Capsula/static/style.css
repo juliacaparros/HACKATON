@@ -1,0 +1,12 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.btn-primary {
+    border-radius: 1rem;
+    padding: 0.5rem 2rem;
+}
