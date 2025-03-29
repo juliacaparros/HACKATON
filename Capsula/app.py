@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from utils.crypto import encrypt_file, generate_doc
+from utils.crypto import encrypt_file, generate_doc, decrypt_file
 from utils.diagram import generate_svg_diagram
 from utils.storage import cargar_historial, guardar_historial
 import os
@@ -16,8 +16,18 @@ os.makedirs(DESCARGAS_FOLDER, exist_ok=True)
 # Cargar historial desde archivo
 capsulas_generadas = cargar_historial()
 
-@app.route('/', methods=['GET', 'POST'])
+# 🟢 RUTA PRINCIPAL: solo muestra la caja fuerte cerrada
+@app.route('/')
 def index():
+    return render_template(
+        'index.html',
+        capsulas=capsulas_generadas,
+        mostrar_formulario=False
+    )
+
+# 📤 RUTA DE SUBIDA: muestra el formulario y procesa la cápsula
+@app.route('/subir', methods=['GET', 'POST'])
+def subir():
     if request.method == 'POST':
         file = request.files['file']
         if file:
@@ -79,11 +89,42 @@ def index():
                 mostrar_formulario=True
             )
 
+    # GET: mostrar solo el formulario para subir
     return render_template(
         'index.html',
         capsulas=capsulas_generadas,
-        mostrar_formulario=bool(capsulas_generadas)
+        mostrar_formulario=True
     )
+
+# 🔐 RUTA DE DESENCRIPTADO
+@app.route('/desencriptar', methods=['GET', 'POST'])
+def desencriptar():
+    if request.method == 'POST':
+        enc_file = request.files['enc_file']
+        key_file = request.files['key_file']
+
+        if enc_file and key_file:
+            enc_path = os.path.join(UPLOAD_FOLDER, secure_filename(enc_file.filename))
+            key_path = os.path.join(UPLOAD_FOLDER, secure_filename(key_file.filename))
+            enc_file.save(enc_path)
+            key_file.save(key_path)
+
+            try:
+                restored_path = decrypt_file(enc_path, key_path)
+                restored_public = os.path.join(DESCARGAS_FOLDER, os.path.basename(restored_path))
+                shutil.copy(restored_path, restored_public)
+
+                return render_template(
+                    'desencriptar.html',
+                    result=f"""
+                    ✅ Archivo desencriptado correctamente:<br>
+                    <a href="/{restored_public}" class="btn btn-success mt-2" download>⬇️ Descargar archivo restaurado</a>
+                    """
+                )
+            except Exception as e:
+                return render_template('desencriptar.html', result=f"❌ Error al desencriptar: {str(e)}")
+
+    return render_template('desencriptar.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -56,7 +56,7 @@
             <div class="card shadow-lg">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Sube un archivo para cifrarlo</h4>
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" action="/subir">
                         <div class="mb-3">
                             <input class="form-control" type="file" name="file" required>
                         </div>
@@ -80,7 +80,7 @@
         {% endif %}
 
         <!-- Historial de cápsulas -->
-        {% if capsulas and capsulas|length > 0 %}
+        {% if mostrar_formulario and capsulas and capsulas|length > 0 %}
             <div class="mt-5 w-100">
                 <h4 class="mb-3">📚 Historial de cápsulas generadas</h4>
                 <ul class="list-group">

@@ -30,8 +30,29 @@ def encrypt_file(filepath):
 
     return encrypted_path
 
+def decrypt_file(encrypted_path, key_path):
+    # Leer la clave secreta
+    with open(key_path, 'rb') as f:
+        key = f.read()
 
-import os
+    fernet = Fernet(key)
+
+    # Leer datos cifrados
+    with open(encrypted_path, 'rb') as f:
+        encrypted_data = f.read()
+
+    # Desencriptar los datos
+    decrypted_data = fernet.decrypt(encrypted_data)
+
+    # Crear nombre de archivo restaurado
+    decrypted_path = encrypted_path.replace('.enc', '.restaurado')
+
+    # Guardar archivo desencriptado
+    with open(decrypted_path, 'wb') as f:
+        f.write(decrypted_data)
+
+    return decrypted_path
+
 
 def generate_doc(original_filename, encrypted_filename):
     doc_text = f"""
