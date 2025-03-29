@@ -1,0 +1,13 @@
+CAPSULA DEL TIEMPO - DOCUMENTACIÓN
+
+Archivo original: Captura_desde_2025-03-25_18-59-21.png
+Archivo cifrado: Captura_desde_2025-03-25_18-59-21.png.enc
+Método de cifrado: Fernet (criptografía simétrica)
+Librería usada: cryptography (Python)
+
+Instrucciones:
+Para descifrar el archivo, se necesita el archivo .enc y la clave secreta original.
+Puedes usar la función decrypt_file() desde este mismo sistema.
+
+Advertencia:
+El contenido ha sido cifrado por seguridad y no puede ser interpretado sin la clave.

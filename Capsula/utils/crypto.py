@@ -29,3 +29,25 @@ def encrypt_file(filepath):
         encrypted_file.write(encrypted)
 
     return encrypted_path
+
+
+def generate_doc(original_filename, encrypted_filename):
+    doc_text = f"""
+CAPSULA DEL TIEMPO - DOCUMENTACIÓN
+
+Archivo original: {original_filename}
+Archivo cifrado: {encrypted_filename}
+Método de cifrado: Fernet (criptografía simétrica)
+Librería usada: cryptography (Python)
+
+Instrucciones:
+Para descifrar el archivo, se necesita el archivo .enc y la clave secreta original.
+Puedes usar la función decrypt_file() desde este mismo sistema.
+
+Advertencia:
+El contenido ha sido cifrado por seguridad y no puede ser interpretado sin la clave.
+    """
+    doc_filename = os.path.splitext(encrypted_filename)[0] + '_info.txt'
+    with open(doc_filename, 'w') as f:
+        f.write(doc_text.strip())
+    return doc_filename

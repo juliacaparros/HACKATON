@@ -1,12 +1,29 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
+    background: url("../static/space.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
 }
-
 .card {
+    background-color: rgba(25, 27, 40, 0.75);
     border-radius: 1rem;
 }
 
 .btn-primary {
     border-radius: 1rem;
     padding: 0.5rem 2rem;
+}
+
+.card-title.mb-3{
+    color: beige;
+}
+.fade-in {
+    opacity: 0;
+    animation: fadeIn ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
