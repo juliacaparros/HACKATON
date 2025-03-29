@@ -1,0 +1,20 @@
+[
+    {
+        "enc": "Captura_desde_2025-03-28_16-35-58.png.enc",
+        "txt": "Captura_desde_2025-03-28_16-35-58.png_info.txt",
+        "svg": "Captura_desde_2025-03-28_16-35-58.png_diagram.svg",
+        "zip": "Captura_desde_2025-03-28_16-35-58.png_capsula.zip"
+    },
+    {
+        "enc": "stefen.jpg.enc",
+        "txt": "stefen.jpg_info.txt",
+        "svg": "stefen.jpg_diagram.svg",
+        "zip": "stefen.jpg_capsula.zip"
+    },
+    {
+        "enc": "constraint.pdf.enc",
+        "txt": "constraint.pdf_info.txt",
+        "svg": "constraint.pdf_diagram.svg",
+        "zip": "constraint.pdf_capsula.zip"
+    }
+]

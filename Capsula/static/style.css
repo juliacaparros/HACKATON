@@ -11,7 +11,8 @@ body {
 }
 
 h1, h4 {
-    color: #2c3e50;
+    color: #e3e7ec;
+    font: weight 8px;
 }
 
 .btn-primary {

@@ -33,26 +33,26 @@
 
     <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center fade-in">
 
+        {% if not result and not mostrar_formulario %}
+            <!-- Caja fuerte cerrada -->
+            <div id="intro" class="text-center mb-5 fade-in">
+                <h1 class="display-5 mb-4">🔐 Guardar información en la cápsula</h1>
 
-        {% if not result %}
-        <!-- Mostrar la caja fuerte si aún no se ha subido nada -->
-        <div id="intro" class="text-center mb-5 fade-in">
-            <h1 class="display-5 mb-4">🔐 Guardar información en la cápsula</h1>
-    
-            <svg id="safeSvg" width="200" height="200" viewBox="0 0 200 200">
-                <rect x="30" y="30" width="140" height="140" rx="10" fill="#444"/>
-                <rect id="door" x="30" y="30" width="70" height="140" rx="10" fill="#888" transform-origin="30px 100px"/>
-                <circle cx="65" cy="100" r="10" fill="#222"/>
-                <line x1="65" y1="90" x2="65" y2="110" stroke="white" stroke-width="2"/>
-                <line x1="55" y1="100" x2="75" y2="100" stroke="white" stroke-width="2"/>
-            </svg>
-    
-            <br><br>
-            <button class="btn btn-success" onclick="openSafe()">Abrir caja fuerte</button>
-        </div>
-    
-        <!-- Formulario oculto hasta abrir la caja -->
-        <div id="formulario" class="d-none fade-in">
+                <svg id="safeSvg" width="200" height="200" viewBox="0 0 200 200">
+                    <rect x="30" y="30" width="140" height="140" rx="10" fill="#444"/>
+                    <rect id="door" x="30" y="30" width="70" height="140" rx="10" fill="#888" transform-origin="30px 100px"/>
+                    <circle cx="65" cy="100" r="10" fill="#222"/>
+                    <line x1="65" y1="90" x2="65" y2="110" stroke="white" stroke-width="2"/>
+                    <line x1="55" y1="100" x2="75" y2="100" stroke="white" stroke-width="2"/>
+                </svg>
+
+                <br><br>
+                <button class="btn btn-success" onclick="openSafe()">Abrir caja fuerte</button>
+            </div>
+        {% endif %}
+
+        <!-- Formulario -->
+        <div id="formulario" class="{% if not mostrar_formulario %}d-none{% endif %} fade-in">
             <div class="card shadow-lg">
                 <div class="card-body">
                     <h4 class="card-title mb-3">Sube un archivo para cifrarlo</h4>
@@ -65,20 +65,37 @@
                 </div>
             </div>
         </div>
-    {% else %}
-        <!-- Mostrar solo el resultado si ya se subió -->
-        <div class="card shadow-lg fade-in">
-            <div class="card-body">
-                <h4 class="card-title mb-3">✅ Archivo enviado con éxito</h4>
-                <div class="alert alert-success" role="alert">
-                    <p>{{ result|safe }}</p>
+
+        {% if result %}
+            <!-- Mostrar resultado -->
+            <div class="card shadow-lg fade-in mt-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">✅ Archivo enviado con éxito</h4>
+                    <div class="alert alert-success" role="alert">
+                        <p>{{ result|safe }}</p>
+                    </div>
+                    <a href="/" class="btn btn-secondary mt-3">Enviar otro archivo</a>
                 </div>
-                <a href="/" class="btn btn-secondary mt-3">Enviar otro archivo</a>
             </div>
-        </div>
-    {% endif %}
-    
-        </div>
+        {% endif %}
+
+        <!-- Historial de cápsulas -->
+        {% if capsulas and capsulas|length > 0 %}
+            <div class="mt-5 w-100">
+                <h4 class="mb-3">📚 Historial de cápsulas generadas</h4>
+                <ul class="list-group">
+                    {% for cap in capsulas %}
+                        <li class="list-group-item">
+                            <strong>Cápsula:</strong> 
+                            <a href="/static/descargas/{{ cap.zip }}" download>📦 {{ cap.zip }}</a> |
+                            <a href="/static/descargas/{{ cap.enc }}" download>🔐 .enc</a> |
+                            <a href="/static/descargas/{{ cap.txt }}" download>📄 .txt</a> |
+                            <a href="/static/descargas/{{ cap.svg }}" download>🖼️ .svg</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
     </div>
 
