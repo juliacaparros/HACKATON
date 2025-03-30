@@ -15,20 +15,26 @@ def load_key():
     with open(key_path, 'rb') as key_file:
         return key_file.read()
 
-def encrypt_file(filepath):
-    key = load_key()
-    f = Fernet(key)
+def encrypt_file(path):
+    key = Fernet.generate_key()
+    fernet = Fernet(key)
 
-    with open(filepath, 'rb') as file:
+    with open(path, 'rb') as file:
         original = file.read()
 
-    encrypted = f.encrypt(original)
-    encrypted_path = filepath + '.enc'
+    encrypted = fernet.encrypt(original)
 
-    with open(encrypted_path, 'wb') as encrypted_file:
-        encrypted_file.write(encrypted)
+    encrypted_path = path + '.enc'
+    with open(encrypted_path, 'wb') as file:
+        file.write(encrypted)
+
+    # Guardar clave
+    key_path = encrypted_path + '.key'
+    with open(key_path, 'wb') as key_file:
+        key_file.write(key)
 
     return encrypted_path
+
 
 def decrypt_file(encrypted_path, key_path):
     # Leer la clave secreta
